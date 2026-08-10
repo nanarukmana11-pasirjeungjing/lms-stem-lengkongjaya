@@ -1,0 +1,532 @@
+/* ============================================================
+   Mobile-first styling untuk LMS STEM Gugus Lengkongjaya
+   Prinsip: satu kolom, kartu besar, tombol besar, kontras tinggi
+   ============================================================ */
+
+:root {
+    --primary: #2563EB;
+    --primary-dark: #1D4ED8;
+    --accent: #F59E0B;
+    --success: #16A34A;
+    --bg-soft: #F5F7FB;
+    --text-dark: #1F2937;
+    --text-muted: #6B7280;
+    --radius: 18px;
+}
+
+/* Batasi lebar konten agar tampak seperti layar HP, bahkan di desktop */
+.block-container {
+    max-width: 480px;
+    padding-top: 1rem !important;
+    padding-bottom: 6rem !important;
+    margin: 0 auto;
+}
+
+/* Sembunyikan menu/footer bawaan Streamlit agar tampilan bersih */
+#MainMenu, footer, header {visibility: hidden;}
+
+/* ---------- Hero / Header ---------- */
+.hero-banner {
+    background: linear-gradient(135deg, var(--primary) 0%, #7C3AED 100%);
+    border-radius: var(--radius);
+    padding: 22px 20px;
+    color: white;
+    margin-bottom: 18px;
+    box-shadow: 0 8px 20px rgba(37, 99, 235, 0.25);
+}
+.hero-eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 0.85;
+    margin-bottom: 6px;
+}
+.hero-title {
+    font-size: 22px;
+    font-weight: 800;
+    line-height: 1.3;
+    margin: 0 0 4px 0;
+}
+.hero-subtitle {
+    font-size: 14px;
+    opacity: 0.92;
+    margin: 0;
+}
+
+/* ---------- Section heading ---------- */
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin: 22px 0 10px 0;
+}
+.section-title .icon { font-size: 18px; }
+
+/* ---------- Kartu umum ---------- */
+.card {
+    background: white;
+    border-radius: var(--radius);
+    padding: 16px;
+    box-shadow: 0 2px 10px rgba(15, 23, 42, 0.06);
+    margin-bottom: 12px;
+    border: 1px solid #EEF1F6;
+}
+.card p { margin: 0 0 8px 0; color: var(--text-dark); font-size: 14px; line-height: 1.55; }
+.card p:last-child { margin-bottom: 0; }
+
+/* ---------- Info kegiatan (identitas) ---------- */
+.info-grid {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 6px 10px;
+    font-size: 13.5px;
+}
+.info-grid .label { color: var(--text-muted); }
+.info-grid .value { color: var(--text-dark); font-weight: 600; }
+
+/* ---------- Chip tujuan ---------- */
+.goal-item {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    font-size: 13.5px;
+    color: var(--text-dark);
+    margin-bottom: 8px;
+}
+.goal-item:last-child { margin-bottom: 0; }
+.goal-bullet {
+    flex: none;
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+}
+
+/* ---------- Timeline (Lini Masa) ---------- */
+.timeline-item {
+    position: relative;
+    padding: 10px 14px 10px 16px;
+    border-left: 4px solid var(--primary);
+    background: white;
+    border-radius: 0 12px 12px 0;
+    margin-bottom: 8px;
+    box-shadow: 0 1px 6px rgba(15, 23, 42, 0.05);
+}
+.timeline-time {
+    font-size: 12px;
+    font-weight: 800;
+    color: var(--primary-dark);
+    margin-bottom: 2px;
+}
+.timeline-activity {
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--text-dark);
+    line-height: 1.4;
+}
+.timeline-meta {
+    font-size: 11.5px;
+    color: var(--text-muted);
+    margin-top: 3px;
+}
+.badge {
+    display: inline-block;
+    font-size: 10.5px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 999px;
+    color: white;
+    margin-top: 4px;
+}
+
+/* ---------- Tombol besar utama ---------- */
+div.stButton > button {
+    width: 100%;
+    padding: 16px 20px !important;
+    font-size: 17px !important;
+    font-weight: 800 !important;
+    border-radius: 16px !important;
+    border: none !important;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%) !important;
+    color: white !important;
+    box-shadow: 0 10px 24px rgba(37, 99, 235, 0.35) !important;
+    transition: transform 0.15s ease;
+}
+div.stButton > button:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%) !important;
+}
+
+.footer-note {
+    text-align: center;
+    font-size: 11.5px;
+    color: var(--text-muted);
+    margin-top: 10px;
+}
+
+/* ---------- Menu navigasi Kelas 1-6 (kompak, ramah HP) ---------- */
+.st-key-kelas-menu div.stButton > button {
+    width: 100% !important;
+    padding: 8px 2px !important;
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    border-radius: 10px !important;
+    box-shadow: none !important;
+    transform: none !important;
+}
+.st-key-kelas-menu div.stButton > button:hover {
+    transform: none !important;
+}
+.kelas-chip {
+    background: #EEF2FF;
+    color: var(--primary-dark);
+    font-size: 12.5px;
+    font-weight: 700;
+    padding: 8px 12px;
+    border-radius: 10px;
+    margin: 10px 0 4px 0;
+}
+
+/* ---------- Kartu Proyek STEM per kelas ---------- */
+.project-card {
+    background: white;
+    border-radius: 14px;
+    padding: 14px;
+    margin-bottom: 10px;
+    border: 1px solid #EEF1F6;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.05);
+}
+.project-chip {
+    display: inline-block;
+    font-size: 10.5px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: #EEF2FF;
+    color: var(--primary-dark);
+    margin-bottom: 6px;
+}
+.project-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-dark);
+    line-height: 1.4;
+}
+.project-produk {
+    font-size: 12.5px;
+    color: var(--text-dark);
+    background: #FFFBEB;
+    border-left: 3px solid var(--accent);
+    padding: 6px 10px;
+    border-radius: 0 8px 8px 0;
+    margin-top: 8px;
+    line-height: 1.5;
+}
+.project-produk b { color: #92400E; }
+
+/* ---------- Jadwal pelaksanaan per pertemuan ---------- */
+.pertemuan-row {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-top: 8px;
+}
+.pertemuan-chip {
+    background: #ECFDF5;
+    border-left: 3px solid var(--success);
+    color: #065F46;
+    font-size: 11.5px;
+    font-weight: 600;
+    padding: 6px 10px;
+    border-radius: 0 8px 8px 0;
+    line-height: 1.5;
+}
+.pertemuan-chip b { color: #047857; }
+.pertemuan-chip-generic {
+    background: #FFFBEB;
+    border-left: 3px dashed var(--accent);
+    color: #92400E;
+}
+.pertemuan-chip-generic b { color: #92400E; }
+.pertemuan-note {
+    background: #F1F5F9;
+    border-radius: 10px;
+    padding: 8px 12px;
+    font-size: 11.5px;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-top: 8px;
+    line-height: 1.5;
+}
+
+/* ---------- Menu pilih pertemuan (P1, P2, ...) ---------- */
+div[class*="st-key-pert_menu_"] div.stButton > button {
+    width: 100% !important;
+    padding: 6px 2px !important;
+    font-size: 12px !important;
+    font-weight: 800 !important;
+    border-radius: 10px !important;
+    box-shadow: none !important;
+    transform: none !important;
+}
+div[class*="st-key-pert_menu_"] div.stButton > button:hover { transform: none !important; }
+
+/* ---------- Kartu uraian detail satu pertemuan ---------- */
+.pert-detail-card {
+    background: #F8FAFC;
+    border: 1px solid #EEF1F6;
+    border-radius: 12px;
+    padding: 10px 12px;
+    margin: 10px 0 8px 0;
+}
+.pert-detail-header {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--primary-dark);
+    margin-bottom: 4px;
+}
+.pert-detail-title {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--text-dark);
+    line-height: 1.4;
+}
+.pert-detail-jp {
+    font-size: 11.5px;
+    color: var(--text-muted);
+    margin-top: 4px;
+}
+.pert-perkiraan-tag {
+    background: #FEF3C7;
+    color: #92400E;
+    font-size: 9.5px;
+    font-weight: 700;
+    padding: 1px 6px;
+    border-radius: 999px;
+    vertical-align: middle;
+}
+
+.pert-badge-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 10px;
+}
+.pert-badge {
+    display: inline-block;
+    font-size: 10.5px;
+    font-weight: 700;
+    padding: 4px 9px;
+    border-radius: 999px;
+    border: 1px solid #E2E8F0;
+    background: #F1F5F9;
+    color: var(--text-dark);
+}
+.pert-badge-tahap {
+    background: #EEF2FF;
+    color: var(--primary-dark);
+    border-color: #C7D2FE;
+}
+
+.pert-section-label {
+    font-size: 12px;
+    font-weight: 800;
+    color: var(--primary-dark);
+    margin: 10px 0 4px 0;
+}
+.pert-list {
+    margin: 0 0 4px 0;
+    padding-left: 18px;
+}
+.pert-list li {
+    font-size: 12.5px;
+    color: var(--text-dark);
+    line-height: 1.55;
+    margin-bottom: 5px;
+}
+.pert-list li:last-child { margin-bottom: 0; }
+
+/* Expander & uploader sedikit dirapikan untuk layar sempit */
+div[data-testid="stExpander"] { border-radius: 12px !important; }
+div[data-testid="stFileUploaderDropzone"] { border-radius: 14px !important; }
+
+/* ---------- Menu navigasi utama (Beranda / Modul Kelas / Supervisi) ---------- */
+.st-key-top-nav {
+    background: #F1F5F9;
+    padding: 6px;
+    border-radius: 14px;
+    margin-bottom: 16px;
+}
+.st-key-top-nav div[role="radiogroup"] {
+    display: flex;
+    gap: 4px;
+    flex-wrap: nowrap;
+}
+.st-key-top-nav div[role="radiogroup"] label {
+    flex: 1;
+    justify-content: center;
+    text-align: center;
+    font-size: 11.5px !important;
+    font-weight: 700 !important;
+    padding: 8px 2px !important;
+    border-radius: 10px !important;
+    margin: 0 !important;
+    background: transparent;
+}
+.st-key-top-nav div[role="radiogroup"] label:has(input:checked) {
+    background: white;
+    box-shadow: 0 1px 4px rgba(15, 23, 42, 0.12);
+    color: var(--primary-dark) !important;
+}
+
+/* ---------- Instrumen Supervisi ---------- */
+.skala-note {
+    background: #EEF2FF;
+    color: var(--primary-dark);
+    font-size: 11.5px;
+    font-weight: 600;
+    padding: 8px 12px;
+    border-radius: 10px;
+    margin-bottom: 12px;
+    line-height: 1.5;
+}
+.instrumen-card {
+    background: white;
+    border-radius: 14px;
+    padding: 14px;
+    margin-bottom: 10px;
+    border: 1px solid #EEF1F6;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.05);
+}
+.instrumen-kategori {
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--primary-dark);
+    margin-bottom: 6px;
+}
+.instrumen-list {
+    margin: 0;
+    padding-left: 18px;
+}
+.instrumen-list li {
+    font-size: 12.5px;
+    color: var(--text-dark);
+    line-height: 1.55;
+    margin-bottom: 6px;
+}
+.instrumen-list li:last-child { margin-bottom: 0; }
+
+.indikator-text {
+    font-size: 12.5px;
+    color: var(--text-dark);
+    line-height: 1.5;
+    margin: 6px 0 4px 0;
+}
+
+/* ---------- Chip pengguna login (top nav) ---------- */
+.user-chip {
+    background: #EEF2FF;
+    color: var(--primary-dark);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 8px 6px;
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 6px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+div[data-testid="column"]:has(.user-chip) div.stButton > button {
+    padding: 6px 4px !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    border-radius: 10px !important;
+    box-shadow: none !important;
+    background: white !important;
+    color: var(--text-muted) !important;
+    border: 1.5px solid #E2E8F0 !important;
+}
+
+/* ---------- Menu tab Lampiran (Portal Supervisi) ---------- */
+.st-key-lampiran-menu div.stButton > button {
+    width: 100% !important;
+    padding: 8px 2px !important;
+    font-size: 10.5px !important;
+    font-weight: 700 !important;
+    border-radius: 10px !important;
+    box-shadow: none !important;
+    transform: none !important;
+    white-space: normal !important;
+    line-height: 1.3 !important;
+}
+.st-key-lampiran-menu div.stButton > button:hover { transform: none !important; }
+
+/* ---------- Isi dokumen generik (Modul Proyek & Panduan Guru) ---------- */
+.doc-heading {
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--primary-dark);
+    margin: 14px 0 6px 0;
+}
+.doc-title {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin: 8px 0 4px 0;
+}
+.doc-text {
+    font-size: 12.5px;
+    color: var(--text-dark);
+    line-height: 1.6;
+    margin-bottom: 8px;
+}
+.doc-table-card {
+    background: #F8FAFC;
+    border: 1px solid #EEF1F6;
+    border-radius: 12px;
+    padding: 10px 12px;
+    margin-bottom: 10px;
+}
+.doc-kv {
+    display: flex;
+    flex-direction: column;
+    padding: 6px 0;
+    border-bottom: 1px dashed #E2E8F0;
+}
+.doc-kv:last-child { border-bottom: none; }
+.doc-k {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--primary-dark);
+}
+.doc-v {
+    font-size: 12px;
+    color: var(--text-dark);
+    line-height: 1.5;
+}
+.tip-box {
+    background: #FFFBEB;
+    border-left: 3px solid var(--accent);
+    border-radius: 0 10px 10px 0;
+    padding: 8px 12px;
+    font-size: 12px;
+    color: #78350F;
+    line-height: 1.55;
+    margin-bottom: 10px;
+}
+.worksheet-note {
+    background: #F1F5F9;
+    border-radius: 10px;
+    padding: 8px 12px;
+    font-size: 11.5px;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-bottom: 10px;
+}
