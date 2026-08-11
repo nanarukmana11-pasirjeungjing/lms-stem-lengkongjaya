@@ -140,6 +140,19 @@ PROJECT_DOCS = {
     },
 }
 
+# Tautan Storybook (buku cerita bergambar) per kelas — dibuat dari Alur
+# Cerita Storybook masing-masing proyek STEM utama kelas tsb (mis. Kelas 2:
+# "Menara Bentuk"), diterbitkan lewat Gemini. Ditampilkan sebagai tombol
+# tautan di halaman Modul Kelas.
+STORYBOOK_LINKS = {
+    1: "https://share.gemini.google/T2e15Gte53iK",
+    2: "https://share.gemini.google/b0sCaR82gtjJ",
+    3: "https://share.gemini.google/79eEvCuaqqtw",
+    4: "https://share.gemini.google/IwsdiuBQLZQg",
+    5: "https://share.gemini.google/QIM2CUdqJePh",
+    6: "https://share.gemini.google/z6pUVKpI40z6",
+}
+
 # Menu navigasi utama aplikasi (label tampilan -> kunci halaman internal)
 NAV_PAGES = {
     "🏠 Beranda": "landing",
