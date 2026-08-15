@@ -3,20 +3,23 @@
 LMS STEM — Gugus Lengkongjaya
 Titik masuk utama aplikasi Streamlit.
 
-Struktur proyek (tahap 4 — Login + Landing + Modul Kelas + Portal Supervisi lengkap):
+Struktur proyek (siap deploy — dokumen sumber dibundel di dalam folder app):
     lms_stem_app/
         app.py              <- entry point (halaman ini)
         data/
             content.py      <- semua teks & data konten, dipisah dari tampilan
         assets/
             style.css        <- styling mobile-first
+        docs/                <- seluruh dokumen sumber (.docx) dibundel di sini
         requirements.txt
 
 Catatan lokasi berkas sumber:
-    Dokumen "Daftar_Proyek_STEM_Kelas*.docx" dan "Program_Supervisi_Kepala_
-    Sekolah_STEM.docx" dibaca langsung dari folder Cowork (satu tingkat di
-    atas folder aplikasi ini, lihat DOCS_DIR) setiap kali halaman terkait
-    dibuka, sehingga kontennya selalu mengikuti dokumen sumber terbaru.
+    Dokumen "Daftar_Proyek_STEM_Kelas*.docx", "Modul_Proyek_STEM_*.docx",
+    "Panduan_Guru_Pembuatan_Produk_*.docx", dan "Program_Supervisi_Kepala_
+    Sekolah_STEM.docx" dibaca dari folder docs/ di dalam folder aplikasi ini
+    (lihat DOCS_DIR) setiap kali halaman terkait dibuka. Untuk memperbarui
+    kontennya di server online, ganti berkas di folder docs/ lalu commit &
+    push ulang ke GitHub — Streamlit Community Cloud akan otomatis redeploy.
 
 Alur akses:
     1. Login sederhana (pilih peran + nama, tanpa kata sandi) -> menentukan
@@ -64,7 +67,7 @@ st.set_page_config(
 )
 
 APP_DIR = Path(__file__).resolve().parent
-DOCS_DIR = APP_DIR.parent  # folder Cowork tempat dokumen KKG STEM disimpan
+DOCS_DIR = APP_DIR / "docs"  # dokumen KKG STEM dibundel di dalam folder aplikasi (siap deploy)
 
 
 def load_css():
@@ -820,6 +823,7 @@ def render_modul_kelas():
         f'<div class="kelas-chip">📚 Kelas {kelas} dipilih — {ringkas["modul"]} ({ringkas["fase"]})</div>',
         unsafe_allow_html=True,
     )
+
 
     st.markdown(
         f'<div class="section-title"><span class="icon">📋</span> Daftar Proyek STEM Kelas {kelas}</div>',

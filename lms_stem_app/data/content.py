@@ -148,13 +148,10 @@ PROJECT_DOCS = {
     },
 }
 
-# Tautan Storybook (buku cerita bergambar + narasi suara) per proyek STEM,
-# dibuat lewat Gem "Storybook" Gemini dan diterbitkan sebagai link publik
-# (format share.gemini.google/... — wajib dibuat lewat Gem Storybook dengan
-# akun Gemini Pro agar gambar & suara ikut tersimpan pada link publiknya).
-# Kunci memakai persis "Judul Proyek" yang sama dengan PROJECT_DOCS, supaya
-# tombol storybook tampil langsung di kartu proyek yang bersangkutan pada
-# halaman Modul Kelas — bukan dikelompokkan per kelas lagi.
+# Tautan Storybook (buku cerita bergambar) per kelas — dibuat dari Alur
+# Cerita Storybook masing-masing proyek STEM utama kelas tsb (mis. Kelas 2:
+# "Menara Bentuk"), diterbitkan lewat Gemini. Ditampilkan sebagai tombol
+# tautan di halaman Modul Kelas.
 STORYBOOK_LINKS = {
     "Berhitung Asyik dengan Benda Kesayangan": "https://share.gemini.google/T2e15Gte53iK",
     "Menara Bentuk: Membangun dari Bangun Ruang": "https://share.gemini.google/b0sCaR82gtjJ",
