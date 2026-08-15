@@ -138,19 +138,32 @@ PROJECT_DOCS = {
         "modul": "Modul_Proyek_STEM_Ekobotol.docx",
         "panduan": None,
     },
+    "Lampu Senter Sederhana: Mengenal Sumber Energi": {
+        "modul": "Modul_Proyek_STEM_Lampu_Senter_Sederhana_Kelas3.docx",
+        "panduan": "Panduan_Guru_Pembuatan_Produk_Lampu_Senter_Sederhana_Kelas3.docx",
+    },
+    "Rumah Panas atau Dingin? Eksplorasi Perpindahan Panas": {
+        "modul": "Modul_Proyek_STEM_Rumah_Panas_atau_Dingin_Kelas5.docx",
+        "panduan": "Panduan_Guru_Pembuatan_Produk_Rumah_Panas_atau_Dingin_Kelas5.docx",
+    },
 }
 
-# Tautan Storybook (buku cerita bergambar) per kelas — dibuat dari Alur
-# Cerita Storybook masing-masing proyek STEM utama kelas tsb (mis. Kelas 2:
-# "Menara Bentuk"), diterbitkan lewat Gemini. Ditampilkan sebagai tombol
-# tautan di halaman Modul Kelas.
+# Tautan Storybook (buku cerita bergambar + narasi suara) per proyek STEM,
+# dibuat lewat Gem "Storybook" Gemini dan diterbitkan sebagai link publik
+# (format share.gemini.google/... — wajib dibuat lewat Gem Storybook dengan
+# akun Gemini Pro agar gambar & suara ikut tersimpan pada link publiknya).
+# Kunci memakai persis "Judul Proyek" yang sama dengan PROJECT_DOCS, supaya
+# tombol storybook tampil langsung di kartu proyek yang bersangkutan pada
+# halaman Modul Kelas — bukan dikelompokkan per kelas lagi.
 STORYBOOK_LINKS = {
-    1: "https://share.gemini.google/T2e15Gte53iK",
-    2: "https://share.gemini.google/b0sCaR82gtjJ",
-    3: "https://share.gemini.google/79eEvCuaqqtw",
-    4: "https://share.gemini.google/IwsdiuBQLZQg",
-    5: "https://share.gemini.google/QIM2CUdqJePh",
-    6: "https://share.gemini.google/z6pUVKpI40z6",
+    "Berhitung Asyik dengan Benda Kesayangan": "https://share.gemini.google/T2e15Gte53iK",
+    "Menara Bentuk: Membangun dari Bangun Ruang": "https://share.gemini.google/b0sCaR82gtjJ",
+    "Es Krim Kantong Ajaib: Mengamati Perubahan Wujud": "https://share.gemini.google/79eEvCuaqqtw",
+    "Lampu Senter Sederhana: Mengenal Sumber Energi": "https://share.gemini.google/r8SrPUz0hDNJ",
+    "Zat Ajaib: Mengamati Perubahan Wujud di Sekitar Kita": "https://share.gemini.google/IwsdiuBQLZQg",
+    "Detektif Zat: Memisahkan Campuran di Sekitar Kita": "https://share.gemini.google/QIM2CUdqJePh",
+    "Rumah Panas atau Dingin? Eksplorasi Perpindahan Panas": "https://share.gemini.google/5pvLAM4PZhxw",
+    "Kompas dan Peta Harta Karun": "https://share.gemini.google/z6pUVKpI40z6",
 }
 
 # Menu navigasi utama aplikasi (label tampilan -> kunci halaman internal)

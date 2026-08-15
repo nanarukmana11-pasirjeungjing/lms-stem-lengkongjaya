@@ -3,23 +3,20 @@
 LMS STEM — Gugus Lengkongjaya
 Titik masuk utama aplikasi Streamlit.
 
-Struktur proyek (siap deploy — dokumen sumber dibundel di dalam folder app):
+Struktur proyek (tahap 4 — Login + Landing + Modul Kelas + Portal Supervisi lengkap):
     lms_stem_app/
         app.py              <- entry point (halaman ini)
         data/
             content.py      <- semua teks & data konten, dipisah dari tampilan
         assets/
             style.css        <- styling mobile-first
-        docs/                <- seluruh dokumen sumber (.docx) dibundel di sini
         requirements.txt
 
 Catatan lokasi berkas sumber:
-    Dokumen "Daftar_Proyek_STEM_Kelas*.docx", "Modul_Proyek_STEM_*.docx",
-    "Panduan_Guru_Pembuatan_Produk_*.docx", dan "Program_Supervisi_Kepala_
-    Sekolah_STEM.docx" dibaca dari folder docs/ di dalam folder aplikasi ini
-    (lihat DOCS_DIR) setiap kali halaman terkait dibuka. Untuk memperbarui
-    kontennya di server online, ganti berkas di folder docs/ lalu commit &
-    push ulang ke GitHub — Streamlit Community Cloud akan otomatis redeploy.
+    Dokumen "Daftar_Proyek_STEM_Kelas*.docx" dan "Program_Supervisi_Kepala_
+    Sekolah_STEM.docx" dibaca langsung dari folder Cowork (satu tingkat di
+    atas folder aplikasi ini, lihat DOCS_DIR) setiap kali halaman terkait
+    dibuka, sehingga kontennya selalu mengikuti dokumen sumber terbaru.
 
 Alur akses:
     1. Login sederhana (pilih peran + nama, tanpa kata sandi) -> menentukan
@@ -67,7 +64,7 @@ st.set_page_config(
 )
 
 APP_DIR = Path(__file__).resolve().parent
-DOCS_DIR = APP_DIR / "docs"  # dokumen KKG STEM dibundel di dalam folder aplikasi (siap deploy)
+DOCS_DIR = APP_DIR.parent  # folder Cowork tempat dokumen KKG STEM disimpan
 
 
 def load_css():
@@ -454,10 +451,26 @@ def _table_is_blank(table) -> bool:
     return True
 
 
+def _paragraph_image_blob(document, paragraph):
+    """Jika paragraf berisi gambar sisipan (diagram ilustrasi pada Panduan
+    Guru), kembalikan bytes gambarnya. python-docx tidak menyertakan gambar
+    dalam `paragraph.text`, sehingga perlu dicari langsung lewat XML mentah
+    paragraf (relasi r:embed -> related part)."""
+    xml = paragraph._p.xml
+    m = re.search(r'r:embed="(rId\d+)"', xml)
+    if not m:
+        return None
+    try:
+        return document.part.related_parts[m.group(1)].blob
+    except Exception:
+        return None
+
+
 def render_docx_generic(document, key_prefix: str = "doc"):
     """Tampilkan seluruh isi dokumen .docx (Modul Proyek / Panduan Guru) apa
     adanya, mengikuti urutan aslinya:
     - Paragraf pendek/tebal/berpola "1. Judul Bagian" -> sub-judul.
+    - Paragraf berisi gambar diagram (Panduan Guru) -> ditampilkan penuh.
     - Paragraf biasa -> teks.
     - Tabel 1 sel -> kotak tips/catatan.
     - Tabel kosong (lembar kerja peserta didik) -> dilewati + catatan singkat.
@@ -467,15 +480,22 @@ def render_docx_generic(document, key_prefix: str = "doc"):
     for item in _iter_block_items(document):
         idx += 1
         if item.__class__.__name__ == "Paragraph":
+            img_blob = _paragraph_image_blob(document, item)
+            if img_blob:
+                st.image(img_blob, use_container_width=True)
+                continue
             txt = item.text.strip()
             if not txt:
                 continue
             is_bold = bool(item.runs) and all(
                 (r.bold or not r.text.strip()) for r in item.runs
             )
+            is_caption = txt.startswith("Gambar ") and bool(re.match(r"^Gambar \d+\.", txt))
             heading_like = bool(re.match(r"^(\d+\.\s|[A-Z]\.\s)", txt)) or (is_bold and len(txt) <= 90)
             if heading_like:
                 st.markdown(f'<div class="doc-heading">{txt}</div>', unsafe_allow_html=True)
+            elif is_caption:
+                st.markdown(f'<div class="doc-caption">{txt}</div>', unsafe_allow_html=True)
             elif is_bold:
                 st.markdown(f'<div class="doc-title">{txt}</div>', unsafe_allow_html=True)
             else:
@@ -622,6 +642,28 @@ def render_project_card(headers, proj: dict, card_key: str = ""):
         """,
         unsafe_allow_html=True,
     )
+
+    # --- Storybook (buku cerita bergambar + narasi suara), jika tersedia untuk proyek ini ---
+    storybook_url = STORYBOOK_LINKS.get(judul.strip())
+    if storybook_url:
+        st.markdown(
+            f"""
+            <div class="storybook-card">
+                <div class="storybook-icon">📖</div>
+                <div class="storybook-text">
+                    <div class="storybook-title">Buku Cerita: {judul}</div>
+                    <div class="storybook-sub">Versi storybook proyek ini — cocok dibacakan untuk peserta didik</div>
+                </div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+        st.link_button(
+            "📖 Baca Buku Cerita (Storybook) →",
+            storybook_url,
+            use_container_width=True,
+            key=f"storybook_btn_{card_key}",
+        )
 
     # --- Rencana pelaksanaan per pertemuan (jika Modul Proyek lengkap tersedia) ---
     docs = PROJECT_DOCS.get(judul.strip())
@@ -778,22 +820,6 @@ def render_modul_kelas():
         f'<div class="kelas-chip">📚 Kelas {kelas} dipilih — {ringkas["modul"]} ({ringkas["fase"]})</div>',
         unsafe_allow_html=True,
     )
-
-    storybook_url = STORYBOOK_LINKS.get(kelas)
-    if storybook_url:
-        st.markdown(
-            f"""
-            <div class="storybook-card">
-                <div class="storybook-icon">📖</div>
-                <div class="storybook-text">
-                    <div class="storybook-title">Buku Cerita Kelas {kelas}</div>
-                    <div class="storybook-sub">Versi storybook proyek STEM di atas — cocok dibacakan untuk peserta didik</div>
-                </div>
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
-        st.link_button("📖 Baca Buku Cerita (Storybook) →", storybook_url, use_container_width=True)
 
     st.markdown(
         f'<div class="section-title"><span class="icon">📋</span> Daftar Proyek STEM Kelas {kelas}</div>',

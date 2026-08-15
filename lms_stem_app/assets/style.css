@@ -538,6 +538,14 @@ div[data-testid="column"]:has(.user-chip) div.stButton > button {
     line-height: 1.6;
     margin-bottom: 8px;
 }
+.doc-caption {
+    font-size: 11px;
+    font-style: italic;
+    color: var(--text-muted);
+    text-align: center;
+    line-height: 1.5;
+    margin: -4px 0 14px 0;
+}
 .doc-table-card {
     background: #F8FAFC;
     border: 1px solid #EEF1F6;
